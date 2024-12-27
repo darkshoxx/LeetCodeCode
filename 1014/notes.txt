@@ -1,0 +1,31 @@
+0,0,0,7,8, ... , 20
+0     3 4         4+n
+
+score(3,4) = 14
+score(3,4+n) = 20 + 7  - 1 - n = 26 - n 
+score(4,4+n) = 20 + 8  - n = 28 - n
+
+(4,4+n)  is better when 28 - n > 14 <=> 14 > n
+
+score(i,j) = v[i] + v[j] + i - j
+vs
+score(j,k) = v[j] + v[k] + j - k
+score(i,j) < score(j,k) 
+<=> v[i] + v[j] + i - j < v[j] + v[k] + j - k
+<=> v[i] - v[k] + i + k < 2*j
+
+score(i,j) = v[i] + v[j] + i - j
+vs
+score(i,k) = v[i] + v[k] + i - k
+score(i,j) < score(i,k) 
+<=> v[i] + v[j] + i - j < v[i] + v[k] + i - k
+<=>  v[j] - j < + v[k] - k
+right_optimum[n] = v[n] - n
+
+score(i,k) = v[i] + v[k] + i - k
+vs
+score(j,k) = v[j] + v[k] + j - k
+score(i,k) < score(j,k) 
+v[i] + v[k] + i - k < v[j] + v[k] + j - k
+v[i] + i < v[k] + k
+left_optimum[n] = v[n] + n
