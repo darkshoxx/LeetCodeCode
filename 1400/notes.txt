@@ -1,0 +1,22 @@
+Proposition:
+Given a string s and an integer k>0, it is possible to
+create k palindrome strings from all letters of s if and only if:
+i) k <= len(s)
+ii) #odd letters in s <= k
+Proof
+=>
+i) is trivial, otherwise there's be empty words
+ii) assume #odd > k. The only way an odd-lettered letter 
+can be part of a palindrome is in the middle, and there
+are at most k middle letters to be filled. contradiction
+if #odd > k
+<= construction: place one of each odd numbered letters
+at the center of a total of #odd letters <= k words
+while there are more than 1 empty words, fill their 
+center with a letter each of a pair of even letters
+this must work because of i)
+You are then left with at least one more even-lettered
+pair (l,l) . if there's still an empty word: make 
+the word "ll".
+for the remaining even pairs, wrap them around any word.
+QED hopefully
