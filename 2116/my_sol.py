@@ -2,7 +2,33 @@ from typing import List
 
 class Solution:
     def canBeValid(self, s: str, locked: str) -> bool:
-        # recreate stack solution from editorial
+        # recreated stack solution from editorial
+        my_len = len(s)
+        open_brackets = []
+        unlockeds = []
+        if my_len % 2 == 1:
+            return False
+        for index in range(my_len):
+            if locked[index] == "0":
+                unlockeds.append(index)
+            elif s[index] == "(":
+                open_brackets.append(index)
+            elif s[index] == "(":
+                if open_brackets:
+                    open_brackets.pop()
+                elif unlockeds:
+                    unlockeds.pop()
+                else:
+                    return False
+        while len(unlockeds)>0 and len(open_brackets)>0:
+            unlockeds.pop()
+            open_brackets.pop()
+        if open_brackets:
+            return False
+        return True
+        
+
+
 
     ## Fast, but wrong
     # from functools import cache
