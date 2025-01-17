@@ -1,0 +1,78 @@
+length 1
+[1] impossible
+[0] derived from [0] or [1]
+length 2
+[0,0] and [1,1] derive [0,0]
+[0,1] and [1,0] derive [1,1]
+[a,b]-> [a^b, a^b]
+length 3
+[0,0,0] and [1,1,1] derive [0,0,0]
+[1,0,0], [0,1,1] -> [1,0,1]
+[0,1,0], [1,0,1] -> [1,1,0]
+[0,0,1], [1,1,0] -> [0,1,1]
+[a,b,c] -> [a^b, b^c, c^a]
+Prop 1: A and !A derive the same thing
+length 4
+[0,0,0,0], [1,1,1,1] -> [0,0,0,0]
+[1,0,1,0], [0,1,0,1] -> [1,1,1,1]
+[1,1,0,0], [0,0,1,1] -> [0,1,0,1]
+[1,0,0,1], [0,1,1,0] -> [1,0,1,0]
+[1,0,0,0], [0,1,1,1] -> [1,0,0,1]
+[0,1,0,0], [1,0,1,1] -> [1,1,0,0]
+[0,0,1,0], [1,1,0,1] -> [0,1,1,0]
+[0,0,0,1], [1,1,1,0] -> [0,0,1,1]
+...
+Prop 2: only even number of 1s can be derived
+Prop 3: number can be derived <==> number of ones is even.
+Lemma: A can be derived <==> a cyclic shift of A can be derived
+Proof of lemma: the derivation rule is cyclic.
+
+Prop 1 proof: 
+!A = ![a_0,a_1,a_2,...,a_{n-2}, a_{n-1}]
+   = [a_0^1,a_1^1,a_2^1,...,a_{n-2}^1, a_{n-1}^1]
+   -> [a_0^1^a_1^1,....]
+
+let B,C such that !A->B A->C, then
+B_i = a_i^1^a_{i+1}^1 = a_i^a_{i+1}^1^1 = a_i^a_{i+1} = C_i
+hence B == C QED
+Prop 2 proof:
+let A->B. For each i in 0,..,n-1, a_i contributes to exactly 2 positions of B, 
+namely i and i+1.
+We can write B as [0,.,0] having A XOR'd with it twice, once with an offset.
+In symbols: B_i = 0^a_i^a_{i+1}, therefore B can be expressed as a sequence of 
+bitflips from each a_i onto 0. [0,...,0] has an even number of 1s, and each a_i
+flips an even number of positions, namely either 0 (if itself 0) or 2 (if itself 1)
+hence the total number of bitflips must be even. Any bitflip will switch the 
+parity of the total count of ones. Since that is an even number, the parity
+remains 0 after each flip. Therefore B has an even number of ones. QED
+Prop 3:
+Remains to show that if the number of ones is even, then it can be derived.
+Proof by complete induction over N
+Induction start: n=1,..,4 see above.
+Induction step: n -> n+2
+let A = [a_0,a_1,a_2,...,a_{n-2}, a_{n-1},a_n, a_{n+1}] with an even number 
+of ones, we need to find a number B such that B -> A.
+Case 1: (any cycle shift of ) A does not have 2 consecutive equal numbers.
+Then n is even, and (a cycle shift of) [1,0,1,0,...,1,0] =A'
+The B= [1,0,0,1,1,0,0,....0,0,1,1,0,0,1] derives A'
+Case 2: A does have two consecutive equal numbers, 
+either [...,1,1,..] or [...,0,0...]. WLOG those numbers are indexed n and n+1 
+(because of Lemma).
+Define A*:=[a_0,a_1,a_2,...,a_{n-2}, a_{n-1}] which is the right-truncation
+of A by 2. A* has the same number of ones as A, which is an even number.
+Using the induction step, we find B*=[b_0,b_1,b_2,...,b_{n-2}, b_{n-1}] 
+such that B*->A*. Extend B* to B as follows:
+B = [x, b_1, b_2,...,b_{n-2}, b_{n-1}, y, z] for free bit variables x,y,z
+for i = 1,...,n-2 we know that b_i^b_{i+1} = a_i, because that holds true in 
+B* and A*
+we want a_0 = x^b_1, and we know that a_0 = b_0^b_1, and hence
+x = x^b_1^b_1 = a_0^b_1 = b_0^b_1^b_1 = b_0 so we choose x=b_0
+we want a_{n-1} = b_{n-1}^y and we know a_{n-1} = b_{n-1}^ b_0 and hence
+y = y^b_{n-1}^b_{n-1} = a_{n-1}^b_{n-1} = b_{n-1}^b_0^b_{n-1} =...=b_0
+so we choose y = b_0
+We have B = [b_0, b_1, b_2,...,b_{n-2}, b_{n-1}, b_0, z] and we need to find
+z such that a_n = b_0^z  and a_{n+1} = z^b_0 = a_n. This is consistent, since
+a_n and a_{n+1} are a neighbouring pair of equal entires.
+We can therefore define z = z^b_0^b_0 = a_n^b_0 = a_{n+1}^b_0 QED
+bit more detail, but not technically necessary:
+if a_n = a_{n+1} = 1, then choose z = !b_0, if a_n = a_{n+1} = 0, choose z=b_0
