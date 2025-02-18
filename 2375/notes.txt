@@ -1,0 +1,50 @@
+n=5
+default :
+IIII
+12345
+
+single variation:
+
+ IIID
+12354
+ IIDI
+12435
+ IDII
+13245
+ DIII
+21345
+
+a single variation at k causes a transposition of k&k+1
+
+double variation:
+
+ IIDD
+12543
+ IDID
+13254
+ IDDI
+14325
+ DIID
+21354
+ DIDI
+21435
+ DDII
+32145
+
+inverting the default:
+ DDDD
+54321
+
+single variation
+ DDDI
+43215
+ DDID
+32154
+ DIDD
+21543
+ IDDD
+15432
+
+double variation:
+ DDII
+32145
