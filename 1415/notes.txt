@@ -1,0 +1,61 @@
+happy strings lexi by length
+1
+
+a
+b
+c
+
+2
+
+ab
+ac
+ba
+bc
+ca
+cb
+
+3
+aba
+abc
+aca
+acb
+bab
+bac
+bca
+bcb
+cab
+cac
+cba
+cbc
+
+4
+abab
+abac
+abca
+abcb
+acab
+acac
+acba
+acbc
+baba
+babc
+baca
+bacb
+bcab
+bcac
+bcba
+bcbc
+caba
+cabc
+caca
+cacb
+cbab
+cbac
+cbca
+cbcb
+
+
+1  1
+2  2
+3  3
+4  0
