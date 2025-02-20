@@ -3,7 +3,8 @@ from typing import List
 
 class Solution:
     def findDifferentBinaryString(self, nums: List[str]) -> str:
-        pass
+        result = [str(1-int(nums[i][i])) for i in range(len(nums))]
+        return "".join(result)
 
 if __name__ == "__main__":
     from examples import inputs, outputs
