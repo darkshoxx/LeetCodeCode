@@ -1,0 +1,51 @@
+Start with n integers k_1,...,k_n where n is the number of unique tiles and k_i 
+is the multiplicity of tile i. 
+Target: o = number of unique permutations and substrings of permutations
+Define l as the lenght of a (sub)string of such a permutations,
+and o_l be those of lenght l. In particular, sum(o_l)_l = o
+for l=1:
+o_1 = n  (trivial)
+for l=2:
+WLOG let 1<=i<=n s.t. k_1,..,k_i =1 and k_(i+1) ,..., k_n>1
+for each 1<=j<=i we have tiling jx for x != j, count i*(n-1)
+for each i<j<=n we have tiling jx for all x, count (n-i)*n
+therefore o_2 = i*(n-1) + (n-i)*n = ni - i + n^2 -ni = n^2 - i
+for l=3:
+WLOG let 1<=i<=j<=n s.t. k_1,..,k_i =1 and k_(i+1) ,..., k_j =2 and
+k_(j+1),...,k_n>2
+if m appears:
+for each j+1<=m<=n we have mab, amb, abm where ab is a solution from l=2
+count 3*(n^2-i) 
+we have mab, mba, amb, abm, bam, bma where a <=i, j<b<=n b!=m
+count 6*(n-j)*(n-j-1)*i
+we have mab, mba, amb, abm, bam, bma where i<a <=j, j<b<=n b!=m
+count 6*(n-j)*(n-j-1)*(j-i)
+the previous two in sum equal 6*(n-j)*(n-j-1)*j
+we have mab, mba, amb, abm, bam, bma where j<a,b,m<=n all distinct
+count n choose 3 =n!/6*(n-3)! = n*(n-1)*(n-2)/6
+we have mma, mam, amm where a is any number that isn't m
+count 3*(n-1)*(n-j)
+we have mmm for m>j
+count n-j
+total count if m appears:
+3*(n^2-i) + 6*(n-j)*(n-j-1)*j +n*(n-1)*(n-2)/6 + 3*(n-1)*(n-j) + n-j
+=3n^2 -3i + 6jn^2 -6j^2n-6jn -6jn +6j^3 + 6j^2 + n^3/6 - n^2/6 - 2n^2/6 + 2n/6 +
++ 3n^2 - 3n - 3nj + 3j + n - j 
+= n^0 (-3i + 6j^3 + 6j^2 + 3j - j) + n^1*(-6j^2 -6j -6j +2/6 -3 -3j +1) +
++ n^2(3 + 6j -1/6 -2/6 +3) + n^3(1/6)
+= n^0 (6j^3 + 6j^2 + 2j -3i) + n^1*(-6j^2 -15j -5/3) +
++ n^2( 6j + 11/2) + n^3(1/6)
+if m does not appear in any of the three spots:
+we have aab, aba, baa for b != a
+count (j-i)*(j-1)
+we have abc for three distinct abc
+count j*(j-1)*(j-2)/6
+total without m: j^2 -ij -j +i + j^3/6 - j^2/6 - 2j^2/6 + 2j/6 
+= j^3(1/6) + j^2(1-3/6) + j^1(-i-1+2/6) + j^0(i)
+in total:
+n^0 (6j^3 + 6j^2 + 2j -3i +1/6 j^3 + j^2/2 + j(-i-2/3) +i) + n^1*(-6j^2 -15j -5/3) +
++ n^2( 6j + 11/2) + n^3(1/6) =
+= n^0 (37/6j^3 + 13/2j^2 j -2i + j(4/3-i)) + n^1*(-6j^2 -15j -5/3) +
++ n^2( 6j + 11/2) + n^3(1/6)
+totally useless.
+

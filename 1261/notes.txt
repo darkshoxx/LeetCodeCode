@@ -1,0 +1,23 @@
+                    0
+        1                       2
+    3       4               5       6
+  7   8  9     10         11  12  13  14
+15 16 171819202122     2324 2526 2728 2930
+
+in other words, given N, we want to reconstruct the path back to 0
+We can do so by checking the parity at each step
+if odd: (n-1)/2
+if even: (n-2)/2
+
+example: n = 27
+27 is odd: last path is LEFT
+(27-1)/2 = 13
+13 is odd: next path is LEFT
+(13-1)/2 = 6
+6 is even: next path in RIGHT
+(6-2)/2 = 2
+2 is even: next path is RIGHT
+(2-2)/2 = 0
+0 is root
+Now read the paths backwards:
+RIGHT, RIGHT, LEFT, LEFT
