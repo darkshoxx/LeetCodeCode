@@ -6,7 +6,7 @@ class Solution:
             cost[i] = min(cost[i-1], cost[i-2]) + cost[i]
         return min(cost[-1], cost[-2])
    
-
+# works, but I can do better
 class Solution1:
     def minCostClimbingStairs(self, cost: List[int]) -> int:
         min_cost = [None]*len(cost)
