@@ -1,0 +1,6 @@
+needle = "sanso"
+haystack = "sansanso"
+candidates = [0,3]
+index 4 (needles [o,a] haystack a)
+for candidate in candidates:
+    if needle[index - candidate] == haystack[index]
