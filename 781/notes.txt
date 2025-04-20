@@ -22,8 +22,8 @@ contribution: 3n+3
 3n+2
 
 k
-kn+r:
+(k+1)n+r:
 r!= 0 
-contribution kn+k
+contribution (k+1)n+k+1
 r == 0
-contribution is kn
+contribution is (k+1)n
