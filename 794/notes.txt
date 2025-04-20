@@ -1,0 +1,11 @@
+First check:
+#X == #O 
+or
+#X == #O + 1
+second check:
+if there are 2 winning lines, they cannot be parallel
+
+Counterexample:
+XXX
+XOO
+OO 
