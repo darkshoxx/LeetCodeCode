@@ -1,0 +1,29 @@
+0
+any number of 0s, n:
+just themselves
+contribution: n
+
+1
+even number of 1s, 2n:
+can be paired up and we found them all
+contribution = 2n
+odd number of 1s, 2n+1:
+all but one can be paired up, so we accout for 1 more:
+contribution: 2n+2
+
+2
+3n 2s:
+can be grouped in 3s
+contribution: 3n
+3n+1 2s:
+3n can be grouped, the last one needs 2 more for accounting
+contribution
+contribution: 3n+3
+3n+2
+
+k
+kn+r:
+r!= 0 
+contribution kn+k
+r == 0
+contribution is kn
